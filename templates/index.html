@@ -1,12 +1,19 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block content %}
 <!DOCTYPE html>
 <html>
 <title>MMA Prediction App</title>
 
 <head>
 <link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+
+{% block scripts %}
+{{ super() }}
+<script src="static/js/index.js"></script>
+
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
-
 <script type="text/javascript">
 $(function() {
     $("#autocomplete1").autocomplete({
@@ -36,13 +43,13 @@ $(function() {
         }
     });
 })
-
 </script>
+{% endblock %}
 </head>
 
 <body>
 
-<form action = "/predict" method="POST">
+<form action = "/predict" method="POST" onsubmit="return verifySearchFields();">
 	<p> Select Fighter: <input name="fighter1" type ="text" 
 		id="autocomplete1"
 		value="Conor McGregor" class="form-control input-lg" /> </p>
@@ -57,6 +64,6 @@ $(function() {
 </body>
 </html>
 
-
+{% endblock %}
 
 

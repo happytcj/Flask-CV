@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, Response, jsonify
+from flask_bootstrap import Bootstrap
 from Modules.preprocess_helper import *
 import json
 import numpy as np
@@ -7,6 +8,7 @@ import pickle
 from wtforms import TextField, Form
 
 application = Flask(__name__)
+bootstrap = Bootstrap(application)
 
 with open("random_forest_model.pkl", "rb") as file:
     model = pickle.load(file)
