@@ -1,22 +1,62 @@
 <!DOCTYPE html>
 <html>
 <title>MMA Prediction App</title>
+
+<head>
+<link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
+<script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
+<script type="text/javascript">
+$(function() {
+    $("#autocomplete1").autocomplete({
+        source:function(request, response) {
+            $.getJSON("{{url_for('autocomplete')}}",{
+                q: request.term, // in flask, "q" will be the argument to look for using request.args
+            }, function(data) {
+                response(data.matching_results); // matching_results from jsonify
+            });
+        },
+        minLength: 2,
+        select: function(event, ui) {
+            console.log(ui.item.value); // not in your question, but might help later
+        }
+    });
+    $("#autocomplete2").autocomplete({
+        source:function(request, response) {
+            $.getJSON("{{url_for('autocomplete')}}",{
+                q: request.term, // in flask, "q" will be the argument to look for using request.args
+            }, function(data) {
+                response(data.matching_results); // matching_results from jsonify
+            });
+        },
+        minLength: 2,
+        select: function(event, ui) {
+            console.log(ui.item.value); // not in your question, but might help later
+        }
+    });
+})
+
+</script>
+</head>
+
 <body>
 
 <form action = "/predict" method="POST">
-	<p> Select Origin:<input name="origin" type ="text" value="JFK" /> </p>
-	<p> Select Destination: <input name="dest" type ="text" value="LAX" /> </p>
-	<p> Select Airline :   
-	<select name="unique_carrier">
-		<option value="AA">American Airlines </option>
-		<option value="DL">Delta Air Lines </option>
-		<option value="B6">JetBlue Airways</option>
-		<option value="WN">Southwest Airlines </option>
-		<option value="UA" selected>United Air Lines </option>
-	</select>
-	<p> Select Day of Week:<input name="day_of_week" type ="text" value="1" /> </p>
-	<p> Select Departure Hour: <input name="dep_hour" type ="text" value="10" /> </p>
+	<p> Select Fighter: <input name="fighter1" type ="text" 
+		id="autocomplete1"
+		value="Conor McGregor" class="form-control input-lg" /> </p>
+	<p> Select Fighter: <input name="fighter2" type ="text" 
+		id="autocomplete2"
+		value="Khabib Nurmagomedov" class="form-control input-lg"/> </p>
+
 	<p> <input type ="submit" value="submit" /> </p>
 </form>
+
+
 </body>
 </html>
+
+
+
+

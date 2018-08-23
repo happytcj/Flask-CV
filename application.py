@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, Response
+from flask import Flask, request, render_template, Response, jsonify
 from Modules.preprocess_helper import *
 import json
 import numpy as np
@@ -15,6 +15,13 @@ with open('df_5w.pkl', 'rb') as file:
 with open ('names.pkl', 'rb') as file:
     fighters = pickle.load(file)
 
+@application.route('/autocomplete1', methods=['GET'])
+@application.route('/autocomplete2', methods=['GET'])
+def autocomplete():
+    search = request.args.get('q')
+    res = [x for x in fighters if search.lower() in x.lower()]
+    return jsonify(matching_results=res)
+
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
@@ -27,8 +34,10 @@ def predict():
 
         fighter1 = result['fighter1'].split(' ')
         fighter2 = result['fighter2'].split(' ')
-        stat1 = df_5w[(df_5w['first'] == fighter1[0]) & (df_5w['last'] == fighter1[1])]
-        stat2 = df_5w[(df_5w['first'] == fighter2[0]) & (df_5w['last'] == fighter2[1])]
+        stat1 = df_5w[(df_5w['first'].str.lower() == fighter1[0].lower()) &
+                (df_5w['last'].str.lower() == fighter1[1].lower())]
+        stat2 = df_5w[(df_5w['first'].str.lower() == fighter2[0].lower()) &
+                (df_5w['last'].str.lower() == fighter2[1].lower())]
         stat1.loc[:,'result'] = 'n/a'
         stat2.loc[:,'result'] = 'n/a'
 
