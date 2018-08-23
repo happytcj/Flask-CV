@@ -3,43 +3,63 @@
 {% block content %}
 <!DOCTYPE html>
 <html>
-<title>MMA Prediction App</title>
+<title>MMA Prediction Model</title>
 
 <head>
 <link href="//code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"></link>
 
+<style>
+	body {
+	  overflow: hidden;
+	  margin: 0;
+	  font-size: 14px;
+	  font-family: "Helvetica Neue", Helvetica;
+	}
+
+	#chart {
+	  position: absolute;
+	  top: 200px;
+	  left: 100px;
+	}	
+</style>	
+
 {% block scripts %}
 {{ super() }}
-<script src="static/js/index.js"></script>
 
+<script src="http://d3js.org/d3.v3.min.js"></script>
 <script src="//code.jquery.com/jquery-2.2.0.min.js"></script>
 <script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
+
+<script src="static/js/index.js"></script>
+<script src="static/js/RadarChart.js"></script>
+<script type="text/javascript" src="static/js/radarscript.js"></script>
+
 <script type="text/javascript">
 $(function() {
     $("#autocomplete1").autocomplete({
         source:function(request, response) {
             $.getJSON("{{url_for('autocomplete')}}",{
-                q: request.term, // in flask, "q" will be the argument to look for using request.args
+                q: request.term,
             }, function(data) {
                 response(data.matching_results); // matching_results from jsonify
             });
         },
         minLength: 2,
         select: function(event, ui) {
-            console.log(ui.item.value); // not in your question, but might help later
+            console.log(ui.item.value);
         }
     });
     $("#autocomplete2").autocomplete({
         source:function(request, response) {
             $.getJSON("{{url_for('autocomplete')}}",{
-                q: request.term, // in flask, "q" will be the argument to look for using request.args
+                q: request.term,
             }, function(data) {
                 response(data.matching_results); // matching_results from jsonify
             });
         },
         minLength: 2,
         select: function(event, ui) {
-            console.log(ui.item.value); // not in your question, but might help later
+            console.log(ui.item.value);
         }
     });
 })
@@ -58,8 +78,12 @@ $(function() {
 		value="Khabib Nurmagomedov" class="form-control input-lg"/> </p>
 
 	<p> <input type ="submit" value="submit" /> </p>
+
 </form>
 
+<div id="body">
+  <div id="chart"></div>
+</div>
 
 </body>
 </html>
