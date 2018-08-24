@@ -5,7 +5,7 @@
 //Data
 var d = [
           [
-            {axis:"Win/Loss Ratio",value:{{ norm1['w/l'] }}},
+            // {axis:"Win/Loss Ratio",value:{{ norm1['w/l'] }}},
             {axis:"Strikes Landed per Minute",value:{{ norm1['SLpM'] }}},
             {axis:"Striking Accuracy",value:{{ norm1['Str. Acc.'] }}},
             {axis:"Strikes Absorbed per Minute",value:{{ norm1['SApM'] }}},
@@ -15,7 +15,7 @@ var d = [
             {axis:"Takedown Defense",value:{{ norm1['TD Def.'] }}},
             {axis:"Average Submissions",value:{{ norm1['Sub. Avg.'] }}},
           ],[
-            {axis:"Win/Loss Ratio",value:{{ norm2['w/l'] }}},
+            // {axis:"Win/Loss Ratio",value:{{ norm2['w/l'] }}},
             {axis:"Strikes Landed per Minute",value:{{ norm2['SLpM'] }}},
             {axis:"Striking Accuracy",value:{{ norm2['Str. Acc.'] }}},
             {axis:"Strikes Absorbed per Minute",value:{{ norm2['SApM'] }}},
@@ -26,6 +26,9 @@ var d = [
             {axis:"Average Submissions",value:{{ norm2['Sub. Avg.'] }}},
           ]
         ];
+
+//Legend titles
+var LegendOptions = ['{{ fighter1 }}', '{{ fighter2 }}'];
 </script>
 {% endblock %}
 

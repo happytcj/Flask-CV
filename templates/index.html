@@ -19,7 +19,7 @@
 	#chart {
 	  position: absolute;
 	  top: 200px;
-	  left: 100px;
+	  left: 200px;
 	}	
 </style>	
 
@@ -36,25 +36,30 @@
 //Data
 var d = [
           [
-            {axis:"Win/Loss Ratio",value:0.56},
-            {axis:"Strikes Landed per Minute",value:0.42},
-            {axis:"Striking Accuracy",value:0.34},
-            {axis:"Strikes Absorbed per Minute",value:0.48},
-            {axis:"Average Takedowns",value:0.14},
-            {axis:"Takedown Accuracy",value:0.11},
-            {axis:"Takedown Defense",value:0.05},
-            {axis:"Average Submissions",value:0.07},
+            // {axis:"Win/Loss Ratio",value:{{ norm1['w/l'] }}},
+            {axis:"Strikes Landed per Minute",value:{{ norm1['SLpM'] }}},
+            {axis:"Striking Accuracy",value:{{ norm1['Str. Acc.'] }}},
+            {axis:"Strikes Absorbed per Minute",value:{{ norm1['SApM'] }}},
+            {axis:"Striking Defense",value:{{ norm1['Str. Def'] }}},
+            {axis:"Average Takedowns",value:{{ norm1['TD Avg'] }}},
+            {axis:"Takedown Accuracy",value:{{ norm1['TD Acc.'] }}},
+            {axis:"Takedown Defense",value:{{ norm1['TD Def.'] }}},
+            {axis:"Average Submissions",value:{{ norm1['Sub. Avg.'] }}},
           ],[
-            {axis:"Win/Loss Ratio",value:0.41},
-            {axis:"Strikes Landed per Minute",value:0.27},
-            {axis:"Striking Accuracy",value:0.28},
-            {axis:"Strikes Absorbed per Minute",value:0.46},
-            {axis:"Average Takedowns",value:0.29},
-            {axis:"Takedown Accuracy",value:0.11},
-            {axis:"Takedown Defense",value:0.14},
-            {axis:"Average Submissions",value:0.05},
+            // {axis:"Win/Loss Ratio",value:{{ norm2['w/l'] }}},
+            {axis:"Strikes Landed per Minute",value:{{ norm2['SLpM'] }}},
+            {axis:"Striking Accuracy",value:{{ norm2['Str. Acc.'] }}},
+            {axis:"Strikes Absorbed per Minute",value:{{ norm2['SApM'] }}},
+            {axis:"Striking Defense",value:{{ norm2['Str. Def'] }}},
+            {axis:"Average Takedowns",value:{{ norm2['TD Avg'] }}},
+            {axis:"Takedown Accuracy",value:{{ norm2['TD Acc.'] }}},
+            {axis:"Takedown Defense",value:{{ norm2['TD Def.'] }}},
+            {axis:"Average Submissions",value:{{ norm2['Sub. Avg.'] }}},
           ]
         ];
+        
+//Legend titles
+var LegendOptions = ['{{ fighter1 }}', '{{ fighter2 }}'];
 </script>
 {% endblock %}
 
@@ -100,10 +105,10 @@ $(function() {
 <form action = "/predict" method="POST" onsubmit="return verifySearchFields();">
 	<p> Select Fighter: <input name="fighter1" type ="text" 
 		id="autocomplete1"
-		value="Conor McGregor" class="form-control input-lg" /> </p>
+		value="{{ fighter1 }}" class="form-control input-lg" /> </p>
 	<p> Select Fighter: <input name="fighter2" type ="text" 
 		id="autocomplete2"
-		value="Khabib Nurmagomedov" class="form-control input-lg"/> </p>
+		value="{{ fighter2 }}" class="form-control input-lg"/> </p>
 
 	<p> <input type ="submit" value="submit" /> </p>
 

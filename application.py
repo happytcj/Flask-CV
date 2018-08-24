@@ -29,7 +29,17 @@ def autocomplete():
 @application.route('/', methods=['GET', 'POST'])
 @application.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+    default1 = 'Conor McGregor'.split(' ')
+    default2 = 'Khabib Nurmagomedov'.split(' ')
+    norm1 = df_norm[(df_norm['first'].str.lower() == default1[0].lower()) &
+            (df_norm['last'].str.lower() == default1[1].lower())]
+    norm2 = df_norm[(df_norm['first'].str.lower() == default2[0].lower()) &
+            (df_norm['last'].str.lower() == default2[1].lower())]
+    return render_template('index.html',
+            fighter1=' '.join(default1), 
+            fighter2=' '.join(default2),
+            norm1 = norm1.to_dict('records')[0],
+            norm2 = norm2.to_dict('records')[0],)
 
 @application.route('/predict', methods=['POST', 'GET'])
 def predict():
@@ -54,11 +64,10 @@ def predict():
                 (df_norm['last'].str.lower() == fighter2[1].lower())]
 
         return render_template('result.html', prediction=prediction, 
-            fighter1=str(''.join(result['fighter1'])), 
+            fighter1=''.join(result['fighter1']), 
             fighter2=''.join(result['fighter2']),
             norm1 = norm1.to_dict('records')[0],
-            norm2 = norm2.to_dict('records')[0],
-            tmp = 1.0)
+            norm2 = norm2.to_dict('records')[0],)
 
 if __name__ == "__main__":
     application.debug = True

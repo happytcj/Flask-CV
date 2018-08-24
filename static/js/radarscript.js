@@ -5,9 +5,6 @@ var w = 500,
 
 var colorscale = d3.scale.category10();
 
-//Legend titles
-var LegendOptions = ['Fighter1', 'Fighter2'];
-
 //Options for the Radar chart, other than default
 var mycfg = {
   w: w,
@@ -30,16 +27,6 @@ var svg = d3.select('#body')
 	.append('svg')
 	.attr("width", w+300)
 	.attr("height", h)
-
-//Create the title for the legend
-var text = svg.append("text")
-	.attr("class", "title")
-	.attr('transform', 'translate(90,0)') 
-	.attr("x", w - 70)
-	.attr("y", 10)
-	.attr("font-size", "12px")
-	.attr("fill", "#404040")
-	.text("What % of owners use a specific service in a week");
 		
 //Initiate Legend	
 var legend = svg.append("g")
