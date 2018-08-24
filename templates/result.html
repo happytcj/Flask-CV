@@ -1,14 +1,52 @@
-{% extends 'bootstrap/base.html' %}
+{% extends 'index.html' %}
 
-{% block content %}
-<!DOCTYPE html>
-<html>
-<title>MMA Prediction App</title>
-<body>
+{% block radarsetting %}
+<script type="text/javascript">
+//Data
+var d = [
+          [
+            {axis:"Win/Loss Ratio",value:{{ norm1['w/l'] }}},
+            {axis:"Strikes Landed per Minute",value:{{ norm1['SLpM'] }}},
+            {axis:"Striking Accuracy",value:{{ norm1['Str. Acc.'] }}},
+            {axis:"Strikes Absorbed per Minute",value:{{ norm1['SApM'] }}},
+            {axis:"Striking Defense",value:{{ norm1['Str. Def'] }}},
+            {axis:"Average Takedowns",value:{{ norm1['TD Avg'] }}},
+            {axis:"Takedown Accuracy",value:{{ norm1['TD Acc.'] }}},
+            {axis:"Takedown Defense",value:{{ norm1['TD Def.'] }}},
+            {axis:"Average Submissions",value:{{ norm1['Sub. Avg.'] }}},
+          ],[
+            {axis:"Win/Loss Ratio",value:{{ norm2['w/l'] }}},
+            {axis:"Strikes Landed per Minute",value:{{ norm2['SLpM'] }}},
+            {axis:"Striking Accuracy",value:{{ norm2['Str. Acc.'] }}},
+            {axis:"Strikes Absorbed per Minute",value:{{ norm2['SApM'] }}},
+            {axis:"Striking Defense",value:{{ norm2['Str. Def'] }}},
+            {axis:"Average Takedowns",value:{{ norm2['TD Avg'] }}},
+            {axis:"Takedown Accuracy",value:{{ norm2['TD Acc.'] }}},
+            {axis:"Takedown Defense",value:{{ norm2['TD Def.'] }}},
+            {axis:"Average Submissions",value:{{ norm2['Sub. Avg.'] }}},
+          ]
+        ];
+</script>
+{% endblock %}
+
+{% block textforms %}
+<form action = "/predict" method="POST" onsubmit="return verifySearchFields();">
+	<p> Select Fighter: <input name="fighter1" type ="text" 
+		id="autocomplete1"
+		value="{{ fighter1 }}" class="form-control input-lg" /> </p>
+	<p> Select Fighter: <input name="fighter2" type ="text" 
+		id="autocomplete2"
+		value="{{ fighter2 }}" class="form-control input-lg"/> </p>
+
+	<p> <input type ="submit" value="submit" /> </p>
+</form>
+{% endblock %}
+
+{% block body %}
+{{ super() }}
+
 <h3> Fight Prediction: {{ prediction }} </h3>
 <p><h4> [0] = Loss </h4></p>
 <p><h4> [1] = Win </h4></p>
 
-</body>
-</html>
 {% endblock %}

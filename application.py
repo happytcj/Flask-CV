@@ -16,6 +16,8 @@ with open('df_5w.pkl', 'rb') as file:
     df_5w = pickle.load(file)
 with open ('names.pkl', 'rb') as file:
     fighters = pickle.load(file)
+with open ('df_norm.pkl', 'rb') as file:
+    df_norm = pickle.load(file)
 
 @application.route('/autocomplete1', methods=['GET'])
 @application.route('/autocomplete2', methods=['GET'])
@@ -46,7 +48,17 @@ def predict():
         delta = generate_delta(stat1, stat2).iloc[:,:-1].values
         prediction = model.predict(delta)
 
-        return render_template('result.html', prediction=prediction)
+        norm1 = df_norm[(df_norm['first'].str.lower() == fighter1[0].lower()) &
+                (df_norm['last'].str.lower() == fighter1[1].lower())]
+        norm2 = df_norm[(df_norm['first'].str.lower() == fighter2[0].lower()) &
+                (df_norm['last'].str.lower() == fighter2[1].lower())]
+
+        return render_template('result.html', prediction=prediction, 
+            fighter1=str(''.join(result['fighter1'])), 
+            fighter2=''.join(result['fighter2']),
+            norm1 = norm1.to_dict('records')[0],
+            norm2 = norm2.to_dict('records')[0],
+            tmp = 1.0)
 
 if __name__ == "__main__":
     application.debug = True

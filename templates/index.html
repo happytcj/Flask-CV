@@ -31,7 +31,35 @@
 <script src="//code.jquery.com/ui/1.10.2/jquery-ui.js" ></script>
 
 <script src="static/js/index.js"></script>
+{% block radarsetting %}
+<script type="text/javascript">
+//Data
+var d = [
+          [
+            {axis:"Win/Loss Ratio",value:0.56},
+            {axis:"Strikes Landed per Minute",value:0.42},
+            {axis:"Striking Accuracy",value:0.34},
+            {axis:"Strikes Absorbed per Minute",value:0.48},
+            {axis:"Average Takedowns",value:0.14},
+            {axis:"Takedown Accuracy",value:0.11},
+            {axis:"Takedown Defense",value:0.05},
+            {axis:"Average Submissions",value:0.07},
+          ],[
+            {axis:"Win/Loss Ratio",value:0.41},
+            {axis:"Strikes Landed per Minute",value:0.27},
+            {axis:"Striking Accuracy",value:0.28},
+            {axis:"Strikes Absorbed per Minute",value:0.46},
+            {axis:"Average Takedowns",value:0.29},
+            {axis:"Takedown Accuracy",value:0.11},
+            {axis:"Takedown Defense",value:0.14},
+            {axis:"Average Submissions",value:0.05},
+          ]
+        ];
+</script>
+{% endblock %}
+
 <script src="static/js/RadarChart.js"></script>
+
 <script type="text/javascript" src="static/js/radarscript.js"></script>
 
 <script type="text/javascript">
@@ -68,7 +96,7 @@ $(function() {
 </head>
 
 <body>
-
+{% block textforms %}
 <form action = "/predict" method="POST" onsubmit="return verifySearchFields();">
 	<p> Select Fighter: <input name="fighter1" type ="text" 
 		id="autocomplete1"
@@ -80,12 +108,16 @@ $(function() {
 	<p> <input type ="submit" value="submit" /> </p>
 
 </form>
+{% endblock %}
 
+{% block radarchart %}
 <div id="body">
-  <div id="chart"></div>
+  <div id="radarchart"></div>
 </div>
+{% endblock %}
 
 </body>
+
 </html>
 
 {% endblock %}

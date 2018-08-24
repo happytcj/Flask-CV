@@ -1,3 +1,5 @@
+// This file is actually run on the page as it loads
+
 var w = 500,
 	h = 500;
 
@@ -5,29 +7,6 @@ var colorscale = d3.scale.category10();
 
 //Legend titles
 var LegendOptions = ['Fighter1', 'Fighter2'];
-
-//Data
-var d = [
-		  [
-			{axis:"Win/Loss Ratio",value:0.56},
-			{axis:"Strikes Landed per Minute",value:0.42},
-			{axis:"Striking Accuracy",value:0.34},
-			{axis:"Strikes Absorbed per Minute",value:0.48},
-			{axis:"Average Takedowns",value:0.14},
-			{axis:"Takedown Accuracy",value:0.11},
-			{axis:"Takedown Defense",value:0.05},
-			{axis:"Average Submissions",value:0.07},
-		  ],[
-			{axis:"Win/Loss Ratio",value:0.41},
-			{axis:"Strikes Landed per Minute",value:0.27},
-			{axis:"Striking Accuracy",value:0.28},
-			{axis:"Strikes Absorbed per Minute",value:0.46},
-			{axis:"Average Takedowns",value:0.29},
-			{axis:"Takedown Accuracy",value:0.11},
-			{axis:"Takedown Defense",value:0.14},
-			{axis:"Average Submissions",value:0.05},
-		  ]
-		];
 
 //Options for the Radar chart, other than default
 var mycfg = {
@@ -40,7 +19,7 @@ var mycfg = {
 
 //Call function to draw the Radar chart
 //Will expect that data is in %'s
-RadarChart.draw("#chart", d, mycfg);
+RadarChart.draw("#radarchart", d, mycfg);
 
 ////////////////////////////////////////////
 /////////// Initiate legend ////////////////
