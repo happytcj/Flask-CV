@@ -18,7 +18,7 @@ Flask==1.0.2
 Flask-Bootstrap==3.3.7.1
 idna==2.6
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 jmespath==0.9.3
 jsonify==0.5
 jsonschema==2.6.0
